@@ -5,6 +5,7 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@ppanggoodoracledb_high?TNS_ADMIN=/home/opc/stockpn/src/main/resources/Wallet/
+#    url: jdbc:oracle:thin:@ppanggoodoracledb_high?TNS_ADMIN=./src/main/resources/Wallet/
     username: HDBOWN
     password: Qwer1234!@#$
   pid:
