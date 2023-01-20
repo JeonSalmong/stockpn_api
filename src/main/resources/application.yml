@@ -7,3 +7,5 @@ spring:
     url: jdbc:oracle:thin:@ppanggoodoracledb_high?TNS_ADMIN=./src/main/resources/Wallet/
     username: HDBOWN
     password: Qwer1234!@#$
+  pid:
+    file: boot.pid

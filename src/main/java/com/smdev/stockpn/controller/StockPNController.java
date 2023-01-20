@@ -46,8 +46,15 @@ public class StockPNController extends HttpServlet {
 
         List resultList = jdbcTemplate.queryForList(query);
 
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("utf-8");
+
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Connection", "close");
+
+        //response.addHeader("Access-Control-Allow-Origin", "*");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
         response.getWriter().write(resultList.toString());
     }
 }
