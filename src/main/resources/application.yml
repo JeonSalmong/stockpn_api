@@ -1,2 +1,9 @@
 server:
   port: 8080
+
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@ppanggoodoracledb_high?TNS_ADMIN=./src/main/resources/Wallet/
+    username: HDBOWN
+    password: Qwer1234!@#$
