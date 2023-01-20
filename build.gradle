@@ -29,6 +29,8 @@ dependencies {
 	implementation 'com.oracle.database.security:oraclepki'
 	implementation 'com.oracle.database.security:osdt_core'
 	implementation 'com.oracle.database.security:osdt_cert'
+	implementation 'com.google.code.gson:gson:2.8.5'
+	implementation "org.json:json:20220924"
 }
 
 tasks.named('test') {

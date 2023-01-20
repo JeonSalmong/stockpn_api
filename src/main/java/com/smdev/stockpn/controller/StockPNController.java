@@ -1,5 +1,9 @@
 package com.smdev.stockpn.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -10,10 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "StockPNController", urlPatterns = "/stockpn")
 public class StockPNController extends HttpServlet {
 
+    private final ObjectMapper mapper = new ObjectMapper();
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -44,8 +50,26 @@ public class StockPNController extends HttpServlet {
                 + " order by date_ desc, ratio desc "
                 + " )  where rownum <= 10           ";
 
-        List resultList = jdbcTemplate.queryForList(query);
+        JSONObject json      = new JSONObject();
+        JSONArray spnDataObjects = new JSONArray();
+        JSONObject spnDataObject;
 
+        List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query);
+
+        for(Map<String, Object> rs : resultList){
+            spnDataObject = new JSONObject();
+            spnDataObject.put("key_code", rs.get("key_code"));
+            spnDataObject.put("code", rs.get("code"));
+            spnDataObject.put("name", rs.get("name"));
+            spnDataObject.put("pn", rs.get("pn"));
+            spnDataObject.put("ratio", rs.get("ratio"));
+            spnDataObject.put("cnt", rs.get("cnt"));
+            spnDataObjects.put(spnDataObject);
+        }
+
+        json.put("StockPN", spnDataObjects);
+
+        System.out.println(json);
 
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
@@ -55,6 +79,6 @@ public class StockPNController extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        response.getWriter().write(resultList.toString());
+        response.getWriter().write(json.toString());
     }
 }
