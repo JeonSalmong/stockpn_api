@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>주식갬성</title>
+    <meta name="title" content="주식종목 감성분석">
+    <meta name="subject" content="오늘 주식 기사를 보고 AI가 종목별 감성분석한 결과 보기!">
+    <meta name="keywords" content="주식 종목 감성 분석">
+    <meta name="author" content="SimonJeon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="canonical" href="https://aistocknp.netlify.app" />
+    <meta property="og:url" content="https://aistocknp.netlify.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="주식종목 감성분석" />
+    <meta property="og:description"
+        content="주기적으로 AI가 주식 기사를 읽고 기사에 나온 종목에 대한 기사 내용을 감성분석한 결과를 볼 수 있습니다. 기사 내용을 AI가 분석한 결과 이므로 '카더라~' 정도로 참고만 하시기 바랍니다." />
+    <meta property="og:image"
+        content="./img/snssharing.png" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="p-3 container navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="https://aistocknp.netlify.app/">주식갬성</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">한국갬성</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section class="section">
+        <h1 class="title">AI가 오늘 <img
+            src="https://flagcdn.com/40x30/us.png"
+            srcset="https://flagcdn.com/80x60/us.png 2x,
+              https://flagcdn.com/120x90/us.png 3x"
+            width="40"
+            height="30"
+            alt="United States"> 주식 기사를 보고</h1>
+        <h2 class="subtitle">종목별 감성분석한 결과 보기!</h2>
+    </section>
+    <h3 class="pb-2 d-flex justify-content-center">AI의 감성을 터치하세요</h3>
+    <section class="d-flex justify-content-center">
+        <h3 class="d-flex align-items-center pr-3">긍정</h3>
+        <div>
+            <input type="checkbox" id="gender" onclick="changeChk();">
+            <label for="gender">
+                <span class="knob">
+                    <i></i>
+                </span>
+            </label>
+        </div>
+        <h3 class="d-flex align-items-center pl-3">부정</h3>
+    </section>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ajax-cross-origin.min.js"></script>
+    <div class="mt-3 container file-upload">
+        <div class="image-upload-wrap">
+            <input class="file-upload-input" type='button' onclick="readURL();" />
+            <div class="drag-text">
+                <img src="img/smiley-thin.png" class="mt-5 pt-5 upload" id="icon">
+                <h3 class="mb-5 pb-5 pt-4  upload-text">여기를 눌러 </br>AI가 기사를 읽고 </br>감성분석하도록 </br>시켜보세요!</h3>
+            </div>
+        </div>
+        <div class="file-upload-content">
+
+            <div id="loading" class="animated bounce">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="text-center">AI가 기사를 분석중입니다.</p>
+            </div>
+            <p class="result-message"></p>
+            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
+
+            <div id="blank">
+                <p>
+                </p>
+                <p> ※ 종목명(Tiker) 감성지수(기사 언급 수)
+                </p>
+            </div>
+            <div id="reload" class="pt-3 image-title-wrap">
+                <button type="button p-2" class="try-again-btn" onclick="location.href='index.html'">
+                    <span class="try-again-text">한국 종목 감성 결과는?</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="ad-banner">
+        <script src="https://ads-partners.coupang.com/g.js"></script>
+        <script>
+            new PartnersCoupang.G({ id:363025 });
+        </script>
+    </div>
+    
+    <footer class="footer pt-5 container d-flex justify-content-center">
+        <div>
+            <p>&copy; Congkey's 2020. All Rights Reserved. </p>
+        </div>
+    </footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+
+        function readURL() {
+            $('.image-upload-wrap').hide();
+            $('#loading').show();
+            $('.file-upload-content').show();
+            $('#reload').hide();
+            $('#blank').hide();
+            //setTimeout(() => { $('#loading').hide();}, 2000);
+            getData();
+        };
+
+        let URL;
+        const urlPositive = "http://146.56.147.121:8080/stockpn?pn=UP";
+        const urlNegative = "http://146.56.147.121:8080/stockpn?pn=UN";
+
+        let labelContainer, maxPredictions;
+        let jsonData;
+
+        maxPredictions = 0;
+        function getData() {
+
+            var today = new Date();
+            var year = today.getFullYear(); // 년도
+            var month = today.getMonth() + 1;  // 월
+            var date = today.getDate();  // 날짜
+            var hours = today.getHours(); // 시
+            var minutes = today.getMinutes();  // 분
+
+            if (document.getElementById("gender").checked) {
+                URL = urlNegative;
+            } else {
+                URL = urlPositive;
+            };
+
+            $.ajax({
+                type:"GET",
+                dataType: "json",
+                url: URL,
+                async: true,
+                cache: false,
+                success: function(data) {
+                    for (key in data) {
+                        //console.log(data[key].length);
+                        maxPredictions = data[key].length;
+                    }
+                    jsonData = data[key];
+
+                    labelContainer = document.getElementById("label-container");
+                    
+                    while ( labelContainer.hasChildNodes() ) { labelContainer.removeChild( labelContainer.firstChild ); }
+
+                    labelContainer.style.visibility = "visible";
+
+                    for (let i = 0; i < maxPredictions; i++) {
+                        var element = document.createElement("div")
+                        element.classList.add("d-flex");
+                        labelContainer.appendChild(element);
+                    }
+
+                    tmp_className = "dog"
+                    resultTitle = year + "년" + month + "월" + date + "일 " + hours + "시" + minutes + "분"
+                    var clPN;
+
+                    if (document.getElementById("gender").checked) {
+                        clPN = "부정";
+                    } else {
+                        clPN = "긍정";
+                    }
+
+                    resultExplain = "AI가 기사를 보고 '" + clPN + "'으로 판단 한 종목 중에 감성지수 상위 " + maxPredictions + "개의 종목 입니다."
+
+                    resultCeleb = " "
+                    var title = "<div class='" + tmp_className + "-animal-title'>" + resultTitle + "</div>"
+                    var explain = "<div class='animal-explain pt-2'>" + resultExplain + "</div>"
+                    var celeb = "<div class='" + tmp_className + "-animal-celeb pt-2 pb-2'>" + resultCeleb + "</div>"
+                    $('.result-message').html(title + explain + celeb);
+                    $('.result-message').show();
+
+                    var barWidth;
+                    var labelTitle;
+                    var cnt;
+                    var st_key;
+
+                    if (maxPredictions > 0) {
+
+                        for (let i = 0; i < maxPredictions; i++) {
+
+                            labelTitle = jsonData[i].name.substring(0, 8) + "(" + jsonData[i].code + ")"
+                            barWidth = jsonData[i].ratio
+                            cnt = jsonData[i].cnt
+                            st_key = jsonData[i].key_code
+
+                            switch (i) {
+                                case 0:
+                                case 5:
+                                    tmp_className = "dog"
+                                    break;
+                                case 1:
+                                case 6:
+                                    tmp_className = "cat"
+                                    break;
+                                case 2:
+                                case 7:
+                                    tmp_className = "rabbit"
+                                    break;
+                                case 3:
+                                case 8:
+                                    tmp_className = "dinosaur"
+                                    break;
+                                case 4:
+                                case 9:
+                                    tmp_className = "bear"
+                                    break;
+                                default:
+                                    tmp_className = "dog"
+                                    labelTitle = "정보없음"
+                                    barWidth = 0
+                            }
+
+                            $('#loading').hide()
+                            var label = "<div class='animal-label d-flex align-items-center'>" + labelTitle + "</div>"
+                            var bar = "<div class='bar-container position-relative container'><div class='" + tmp_className + "-box'></div><div class='d-flex justify-content-center align-items-center " + tmp_className + "-bar' style='width: " + barWidth + "%'><span class='d-block percent-text'>" + barWidth + "%("+cnt+")</span></div></div>"
+                            labelContainer.childNodes[i].innerHTML = label + bar;
+                            $('#blank').show();
+                            $('#reload').show();
+                        }
+                    } else {
+                        maxPredictions = 1;
+                        tmp_className = "dog"
+                        labelTitle = "정보없음";
+                        barWidth = 0;
+
+                        $('#loading').hide()
+                        var label = "<div class='animal-label d-flex align-items-center'>" + labelTitle + "</div>"
+                        var bar = "<div class='bar-container position-relative container'><div class='" + tmp_className + "-box'></div><div class='d-flex justify-content-center align-items-center " + tmp_className + "-bar' style='width: " + barWidth + "%'></div></div>"
+                        labelContainer.childNodes[0].innerHTML = label + bar;
+                        $('#blank').show();
+                        $('#reload').show();
+                    }
+
+                },
+                error: function(jqXHR, exception) {
+                    if (jqXHR.status === 0) {
+                        alert('Not connect.\n Verify Network.');
+                    }
+                    else if (jqXHR.status == 400) {
+                        alert('Server understood the request, but request content was invalid. [400]');
+                    }
+                    else if (jqXHR.status == 401) {
+                        alert('Unauthorized access. [401]');
+                    }
+                    else if (jqXHR.status == 403) {
+                        alert('Forbidden resource can not be accessed. [403]');
+                    }
+                    else if (jqXHR.status == 404) {
+                        alert('Requested page not found. [404]');
+                    }
+                    else if (jqXHR.status == 500) {
+                        alert('Internal server error. [500]');
+                    }
+                    else if (jqXHR.status == 503) {
+                        alert('Service unavailable. [503]');
+                    }
+                    else if (exception === 'parsererror') {
+                        alert('Requested JSON parse failed. [Failed]');
+                    }
+                    else if (exception === 'timeout') {
+                        alert('Time out error. [Timeout]');
+                    }
+                    else if (exception === 'abort') {
+                        alert('Ajax request aborted. [Aborted]');
+                    }
+                    else {
+                        alert('Uncaught Error.n' + jqXHR.responseText);
+                    }
+                }
+            });
+        };
+
+        function changeChk() {
+            if (maxPredictions > 0) {
+                $('.image-upload-wrap').show();
+                $('#loading').hide();
+                $('.file-upload-content').hide();
+                $('.result-message').hide();
+                labelContainer.style.visibility = "hidden";
+            }
+
+            if (document.getElementById("gender").checked) {
+                document.getElementById("icon").src = "img/frown-thin.png";
+            } else {
+                document.getElementById("icon").src = "img/smiley-thin.png";
+            }
+        };
+
+    </script>
+</body>
+
+</html>

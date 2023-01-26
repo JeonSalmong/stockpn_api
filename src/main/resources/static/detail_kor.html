@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/detail_kor.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ajax-cross-origin.min.js"></script>
+    <script>
+
+        function Request(){
+            var requestParam ="";
+            this.getParameter = function(param){
+            var url = unescape(location.href); //현재 주소를 decoding
+            var paramArr = (url.substring(url.indexOf("?")+1,url.length)).split("&"); //파라미터만 자르고, 다시 &그분자를 잘라서 배열에 넣는다.
+
+                for(var i = 0 ; i < paramArr.length ; i++){
+                    var temp = paramArr[i].split("="); //파라미터 변수명을 담음
+                    if(temp[0].toUpperCase() == param.toUpperCase()){
+                        requestParam = paramArr[i].split("=")[1]; // 변수명과 일치할 경우 데이터 삽입
+                        break;
+                    }
+                }
+                return requestParam;
+            };
+        }
+
+        var request = new Request();
+
+        var st_key = request.getParameter("st_key");
+
+        function bodyOnload() {
+            $('#loading').show();
+            getData();
+        };
+
+        let jsonData;
+        var st_code;
+        var st_name;
+        var ticker_desc1;
+        var ticker_desc2;
+        var close;
+        var diff;
+        var open;
+        var high;
+        var low;
+        var volume;
+        var sise_52_price;
+        var sise_revenue_rate;
+        var sise_siga_tot;
+        var sise_siga_tot2;
+        var sise_issue_stock_normal;
+        var toja_discision;
+        var toja_prop_price;
+        var toja_eps;
+        var toja_per;
+        var toja_comp;
+        var srim_revenue_rate;
+        var srim_jibea;
+        var srim_roa;
+        var srim_roe;
+        var srim_value;
+        var srim_issue_stock;
+        var srim_prop_price;
+        var srim_10_price;
+        var srim_20_price;
+
+        function getData() {
+
+            URL = "http://146.56.147.121:8080/stockpn?pn=DEKO&key="+st_key;
+
+            $.ajax({
+                type:"GET",
+                dataType: "json",
+                url: URL,
+                async: true,
+                cache: false,
+                success: function(data) {
+                    var data_cnt = 0;
+                    for (key in data) {
+                        console.log(data[key].length);
+                        data_cnt = data[key].length
+                    }
+
+                    if (data_cnt > 0) {
+                        jsonData = data[key];
+
+                        st_code = jsonData[0].code;
+                        document.getElementById("st_code").innerText = st_code;
+                        st_name = jsonData[0].name;
+                        document.getElementById("st_name").innerText = st_name;
+                        ticker_desc1 = jsonData[0].ticker_desc1;
+                        ticker_desc2 = jsonData[0].ticker_desc2;
+                        document.getElementById("ticker_desc").innerHTML = ticker_desc1 +"<br>"+ticker_desc2;
+                        close = jsonData[0].close;
+                        diff = jsonData[0].diff;
+                        document.getElementById("close").innerText = close +"/ "+diff;
+                        open = jsonData[0].open;
+                        document.getElementById("open").innerText = open;
+                        high = jsonData[0].high;
+                        document.getElementById("high").innerText = high;
+                        low = jsonData[0].low;
+                        document.getElementById("low").innerText = low;
+                        volume = jsonData[0].volume;
+                        document.getElementById("volume").innerText = volume;
+                        sise_52_price = jsonData[0].sise_52_price;
+                        document.getElementById("sise_52_price").innerText = sise_52_price;
+                        sise_revenue_rate = jsonData[0].sise_revenue_rate;
+                        document.getElementById("sise_revenue_rate").innerText = sise_revenue_rate;
+                        sise_siga_tot = jsonData[0].sise_siga_tot;
+                        document.getElementById("sise_siga_tot").innerText = sise_siga_tot;
+                        sise_siga_tot2 = jsonData[0].sise_siga_tot2;
+                        document.getElementById("sise_siga_tot2").innerText = sise_siga_tot2;
+                        sise_issue_stock_normal = jsonData[0].sise_issue_stock_normal;
+                        document.getElementById("sise_issue_stock_normal").innerText = sise_issue_stock_normal;
+
+                        toja_discision = jsonData[0].toja_discision;
+                        document.getElementById("toja_discision").innerText = toja_discision;
+                        toja_prop_price = jsonData[0].toja_prop_price;
+                        document.getElementById("toja_prop_price").innerText = toja_prop_price;
+                        toja_eps = jsonData[0].toja_eps;
+                        document.getElementById("toja_eps").innerText = toja_eps;
+                        toja_per = jsonData[0].toja_per;
+                        document.getElementById("toja_per").innerText = toja_per;
+                        toja_comp = jsonData[0].toja_comp;
+                        document.getElementById("toja_comp").innerText = toja_comp;
+
+                        srim_revenue_rate = jsonData[0].srim_revenue_rate;
+                        document.getElementById("srim_revenue_rate").innerText = srim_revenue_rate;
+                        srim_jibea = jsonData[0].srim_jibea;
+                        document.getElementById("srim_jibea").innerText = srim_jibea;
+                        srim_roa = jsonData[0].srim_roa;
+                        document.getElementById("srim_roa").innerText = srim_roa;
+                        srim_roe = jsonData[0].srim_roe;
+                        document.getElementById("srim_roe").innerText = srim_roe;
+                        srim_value = jsonData[0].srim_value;
+                        document.getElementById("srim_value").innerText = srim_value;
+                        srim_issue_stock = jsonData[0].srim_issue_stock;
+                        document.getElementById("srim_issue_stock").innerText = srim_issue_stock;
+                        srim_prop_price = jsonData[0].srim_prop_price;
+                        document.getElementById("srim_prop_price").innerText = srim_prop_price;
+                        srim_10_price = jsonData[0].srim_10_price;
+                        document.getElementById("srim_10_price").innerText = srim_10_price;
+                        srim_20_price = jsonData[0].srim_20_price;
+                        document.getElementById("srim_20_price").innerText = srim_20_price;
+
+                        $('#loading').hide()
+                        $('#content_container').show()
+                        $('.ad-banner').show()
+                    } else {
+                        $('#loading').hide()
+                        $('#err_msg').show()
+                    }
+                    $('#button').show()
+                }
+            });
+        };
+
+    </script>
+    <title>Document</title>
+</head>
+<body onload="bodyOnload()">
+    <div class="detail">
+        <div id="loading" class="animated bounce"></div>
+        <div id="err_msg"><h5 class="title1">이 종목의 상세 데이터를 생성하지 못 했습니다. 나중에 다시 확인 해 주세요~ </h5></div>
+        <div id="content_container">
+            <h3 class="title">종목정보</h3>
+            <table class="table">
+                <thead>
+                    <th>종목코드</th>
+                    <th>종목명</th>
+                    <th>분류</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id= "st_code", data-label="종목코드"></td>
+                        <td id= "st_name", data-label="종목명"></td>
+                        <td id= "ticker_desc", data-label="분류"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="title">시세현황</h3>
+            <table class="table"  id="table1">
+                <thead>
+                    <th>종가/전일대비</th>
+                    <th>시가</th>
+                    <th>고가</th>
+                    <th>저가</th>
+                    <th>거래량</th>
+                    <th>52주.최고가/최저가</th>
+                    <th>수익률(1M/3M/6M/1Y)</th>
+                    <th>시가총액(전체,억원)</th>
+                    <th>시가총액(보통주,억원)</th>
+                    <th>발행주식수(보통주/우선주)</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="close", data-label="종가/전일대비"></td>
+                        <td id="open", data-label="시가"></td>
+                        <td id="high", data-label="고가"></td>
+                        <td id="low", data-label="저가"></td>
+                        <td id="volume", data-label="거래량"></td>
+                        <td id="sise_52_price", data-label="52주.최고가/최저가"></td>
+                        <td id="sise_revenue_rate", data-label="수익률(1M/3M/6M/1Y)"></td>
+                        <td id="sise_siga_tot", data-label="시가총액(전체,억원)"></td>
+                        <td id="sise_siga_tot2", data-label="시가총액(보통주,억원)"></td>
+                        <td id="sise_issue_stock_normal", data-label="발행주식수(보통주/우선주)"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="title">투자의견 컨센서스</h3>
+            <table class="table">
+                <thead>
+                    <th>투자의견(5)</th>
+                    <th>목표주가</th>
+                    <th>EPS</th>
+                    <th>PER</th>
+                    <th>추정기관수</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="toja_discision", data-label="투자의견(5)"></td>
+                        <td id="toja_prop_price", data-label="목표주가"></td>
+                        <td id="toja_eps", data-label="EPS"></td>
+                        <td id="toja_per", data-label="PER"></td>
+                        <td id="toja_comp", data-label="추정기관수"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="title">S-RIM (AI가 계산 해 본 수치)</h3>
+            <table class="table" id="table1">
+                <thead>
+                    <th>BBB-등급 5년 채권 수익율</th>
+                    <th>지배주주 지분</th>
+                    <th>ROA</th>
+                    <th>ROE</th>
+                    <th>기업가치</th>
+                    <th>발행주식수(보통주)</th>
+                    <th>적정가격</th>
+                    <th>10% 이익 감소시</th>
+                    <th>20% 이익 감소시</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="srim_revenue_rate", data-label="BBB-등급 5년 채권 수익율"></td>
+                        <td id="srim_jibea", data-label="지배주주 지분"></td>
+                        <td id="srim_roa", data-label="ROA"></td>
+                        <td id="srim_roe", data-label="ROE"></td>
+                        <td id="srim_value", data-label="기업가치"></td>
+                        <td id="srim_issue_stock", data-label="발행주식수(보통주)"></td>
+                        <td id="srim_prop_price", data-label="적정가격"></td>
+                        <td id="srim_10_price", data-label="10% 이익 감소시"></td>
+                        <td id="srim_20_price", data-label="20% 이익 감소시"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5 class="title1">본 자료의 내용에 의거하여 행해진 투자행위 결과에 대하여 어떠한 책임도 지지 않으며 법적 분쟁에서 증거로 사용 될 수 없습니다.</h5>
+        </div>
+    </div>
+    <br>
+    <button id="button" onclick="location.href='index.html'">확인</button>
+    <div class="ad-banner">
+        <ins class="kakao_ad_area" style="display:none;" 
+        data-ad-unit    = "DAN-1hv2rxegl9a28" 
+        data-ad-width   = "320" 
+        data-ad-height  = "100"></ins> 
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
+</body>
+</html>
