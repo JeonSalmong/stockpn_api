@@ -31,6 +31,10 @@ dependencies {
 	implementation 'com.oracle.database.security:osdt_cert'
 	implementation 'com.google.code.gson:gson:2.8.5'
 	implementation "org.json:json:20220924"
+
+	implementation 'org.apache.commons:commons-lang3:3.0'
+	implementation 'org.apache.commons:commons-collections4:4.0'
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 }
 
 tasks.named('test') {

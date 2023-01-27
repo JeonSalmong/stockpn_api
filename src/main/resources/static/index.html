@@ -14,8 +14,8 @@
     <meta name="keywords" content="주식 종목 감성 분석">
     <meta name="author" content="SimonJeon">
     <link rel="stylesheet" href="style.css">
-    <link rel="canonical" href="https://aistocknp.netlify.app" />
-    <meta property="og:url" content="https://aistocknp.netlify.app" />
+    <link rel="canonical" href="http://146.56.147.121:8080" />
+    <meta property="og:url" content="http://146.56.147.121:8080" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="주식종목 감성분석" />
     <meta property="og:description"
@@ -28,7 +28,7 @@
 
 <body>
     <nav class="p-3 container navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="https://aistocknp.netlify.app/">주식갬성</a>
+        <a class="navbar-brand" href="http://146.56.147.121:8080">주식갬성</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -97,12 +97,19 @@
             </div>
         </div>
     </div>
+<!--    <div class="ad-banner">-->
+<!--        <ins class="kakao_ad_area" style="display:none;" -->
+<!--        data-ad-unit    = "DAN-1hv2rxegl9a28" -->
+<!--        data-ad-width   = "320" -->
+<!--        data-ad-height  = "100"></ins> -->
+<!--        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>-->
+<!--    </div>-->
+
     <div class="ad-banner">
-        <ins class="kakao_ad_area" style="display:none;" 
-        data-ad-unit    = "DAN-1hv2rxegl9a28" 
-        data-ad-width   = "320" 
-        data-ad-height  = "100"></ins> 
-        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+        <script src="https://ads-partners.coupang.com/g.js"></script>
+        <script>
+            new PartnersCoupang.G({ id:363025 });
+        </script>
     </div>
     
     <footer class="footer pt-5 container d-flex justify-content-center">
@@ -126,8 +133,9 @@
 
         let URL;
         const urlPositive = "http://146.56.147.121:8080/stockpn?pn=P";
-        // const urlPositive = "http://localhost:8080/stockpn?pn=P";
         const urlNegative = "http://146.56.147.121:8080/stockpn?pn=N";
+        // const urlPositive = "http://localhost:8080/stockpn?pn=P";
+        // const urlNegative = "http://localhost:8080/stockpn?pn=N";
 
         let labelContainer, maxPredictions;
         let jsonData;
@@ -210,7 +218,7 @@
                             labelTitle = jsonData[i].name.substring(0, 5) + "(" + jsonData[i].code + ")"
                             barWidth = jsonData[i].ratio
                             cnt = jsonData[i].cnt
-                            st_key = jsonData[i].key_code
+                            st_key = jsonData[i].keycode
 
                             switch (i) {
                                 case 0:

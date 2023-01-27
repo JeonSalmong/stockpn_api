@@ -69,6 +69,7 @@
         function getData() {
 
             URL = "http://146.56.147.121:8080/stockpn?pn=DEKO&key="+st_key;
+            // URL = "http://localhost:8080/stockpn?pn=DEKO&key="+st_key;
 
             $.ajax({
                 type:"GET",
@@ -90,8 +91,8 @@
                         document.getElementById("st_code").innerText = st_code;
                         st_name = jsonData[0].name;
                         document.getElementById("st_name").innerText = st_name;
-                        ticker_desc1 = jsonData[0].ticker_desc1;
-                        ticker_desc2 = jsonData[0].ticker_desc2;
+                        ticker_desc1 = jsonData[0].tickerDesc1;
+                        ticker_desc2 = jsonData[0].tickerDesc2;
                         document.getElementById("ticker_desc").innerHTML = ticker_desc1 +"<br>"+ticker_desc2;
                         close = jsonData[0].close;
                         diff = jsonData[0].diff;
@@ -104,45 +105,45 @@
                         document.getElementById("low").innerText = low;
                         volume = jsonData[0].volume;
                         document.getElementById("volume").innerText = volume;
-                        sise_52_price = jsonData[0].sise_52_price;
+                        sise_52_price = jsonData[0].sise52Price;
                         document.getElementById("sise_52_price").innerText = sise_52_price;
-                        sise_revenue_rate = jsonData[0].sise_revenue_rate;
+                        sise_revenue_rate = jsonData[0].siseRevenueRate;
                         document.getElementById("sise_revenue_rate").innerText = sise_revenue_rate;
-                        sise_siga_tot = jsonData[0].sise_siga_tot;
+                        sise_siga_tot = jsonData[0].siseSigaTot;
                         document.getElementById("sise_siga_tot").innerText = sise_siga_tot;
-                        sise_siga_tot2 = jsonData[0].sise_siga_tot2;
+                        sise_siga_tot2 = jsonData[0].siseSigaTot2;
                         document.getElementById("sise_siga_tot2").innerText = sise_siga_tot2;
-                        sise_issue_stock_normal = jsonData[0].sise_issue_stock_normal;
+                        sise_issue_stock_normal = jsonData[0].siseIssueStockNormal;
                         document.getElementById("sise_issue_stock_normal").innerText = sise_issue_stock_normal;
 
-                        toja_discision = jsonData[0].toja_discision;
+                        toja_discision = jsonData[0].tojaDiscision;
                         document.getElementById("toja_discision").innerText = toja_discision;
-                        toja_prop_price = jsonData[0].toja_prop_price;
+                        toja_prop_price = jsonData[0].tojaPropPrice;
                         document.getElementById("toja_prop_price").innerText = toja_prop_price;
-                        toja_eps = jsonData[0].toja_eps;
+                        toja_eps = jsonData[0].tojaEps;
                         document.getElementById("toja_eps").innerText = toja_eps;
-                        toja_per = jsonData[0].toja_per;
+                        toja_per = jsonData[0].tojaPer;
                         document.getElementById("toja_per").innerText = toja_per;
-                        toja_comp = jsonData[0].toja_comp;
+                        toja_comp = jsonData[0].tojaComp;
                         document.getElementById("toja_comp").innerText = toja_comp;
 
-                        srim_revenue_rate = jsonData[0].srim_revenue_rate;
+                        srim_revenue_rate = jsonData[0].srimRevenueRate;
                         document.getElementById("srim_revenue_rate").innerText = srim_revenue_rate;
-                        srim_jibea = jsonData[0].srim_jibea;
+                        srim_jibea = jsonData[0].srimJibea;
                         document.getElementById("srim_jibea").innerText = srim_jibea;
-                        srim_roa = jsonData[0].srim_roa;
+                        srim_roa = jsonData[0].srimRoa;
                         document.getElementById("srim_roa").innerText = srim_roa;
-                        srim_roe = jsonData[0].srim_roe;
+                        srim_roe = jsonData[0].srimRoe;
                         document.getElementById("srim_roe").innerText = srim_roe;
-                        srim_value = jsonData[0].srim_value;
+                        srim_value = jsonData[0].srimValue;
                         document.getElementById("srim_value").innerText = srim_value;
-                        srim_issue_stock = jsonData[0].srim_issue_stock;
+                        srim_issue_stock = jsonData[0].srimIssueStock;
                         document.getElementById("srim_issue_stock").innerText = srim_issue_stock;
-                        srim_prop_price = jsonData[0].srim_prop_price;
+                        srim_prop_price = jsonData[0].srimPropPrice;
                         document.getElementById("srim_prop_price").innerText = srim_prop_price;
-                        srim_10_price = jsonData[0].srim_10_price;
+                        srim_10_price = jsonData[0].srim10Price;
                         document.getElementById("srim_10_price").innerText = srim_10_price;
-                        srim_20_price = jsonData[0].srim_20_price;
+                        srim_20_price = jsonData[0].srim20Price;
                         document.getElementById("srim_20_price").innerText = srim_20_price;
 
                         $('#loading').hide()

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smdev.stockpn.repository.StockPNRepository">
+
+    <select id="getPos" parameterType="ParamMap" resultType="ParamMap">
+        select *
+        from (
+                select  a.date_,
+                        a.code_     as code,
+                        a.name_     as name,
+                        max(pn_)       pn,
+                        max(ratio_)    ratio,
+                        count(*)       cnt,
+                        max(a.key_) as keyCode
+                from    prediction_pn a
+                where   1 = 1
+                and     pn_ in ('P', 'C')
+                and     date_ = to_char(sysdate, 'YYYY-MM-DD')
+                group by a.date_, code_, name_
+                order by date_ desc, ratio desc
+        ) where rownum <![CDATA[ < ]]>= 10
+    </select>
+
+    <select id="getNeg" parameterType="ParamMap" resultType="ParamMap">
+        select *
+        from (
+                 select  a.date_,
+                         a.code_     as code,
+                         substr(name_,1,1) || lpad('*',length(name_)-2,'*') || substr(name_, length(name_), 1) AS name,
+                         max(pn_)       pn,
+                         max(ratio_)    ratio,
+                         count(*)       cnt,
+                         max(a.key_) as keyCode
+                 from    hdbown.prediction_pn a
+                 where   1 = 1
+                   and     pn_ = 'N'
+                   and     date_ = to_char(sysdate, 'YYYY-MM-DD')
+                 group by a.date_, code_, name_
+                 order by date_ desc, ratio desc
+             ) where rownum <![CDATA[ < ]]>= 10
+    </select>
+
+    <select id="getUSA" parameterType="ParamMap" resultType="ParamMap">
+        select *
+        from (
+            select
+                a.ticker as key_code
+                , a.ticker as code
+                , a.company_name as name
+                , a.cl_pn as pn
+                , a.ratio
+                , a.cnt
+                from
+                (
+                select
+                        ticker, date_, compound, company_name,
+                        round(abs(compound), 2) * 100 as ratio,
+                        case when compound <![CDATA[ > ]]> 0 then 'P' when  compound <![CDATA[ < ]]> 0 then 'N' end cl_pn,
+                        count(*) cnt
+                from    HDBOWN.prediction_pn_us
+                where   1=1
+                and     date_ = to_char(sysdate, 'YYYYMMDD')
+                group by ticker, date_, compound, company_name
+            ) a
+            where 1=1
+            and a.cl_pn is not null
+            <if test="PN != null and PN != ''">
+                and a.cl_pn = #{PN}
+            </if>
+            order by a.ratio desc
+         ) where rownum <![CDATA[ < ]]>= 10
+    </select>
+
+    <select id="getDetail" parameterType="ParamMap" resultType="ParamMap">
+        select
+            *
+        from (
+                 select
+                        a.code_, a.name_, nvl(a.close_, 0) as close, nvl(a.diff_, 0) as diff, nvl(a.open_, 0) as open,
+                        nvl(a.high_, 0) as high, nvl(a.low_, 0) as low, nvl(a.volume_, 0) as volume,
+                        b.ticker_desc1, b.ticker_desc2, b.sise_52_price, b.sise_revenue_rate, b.sise_siga_tot, b.sise_siga_tot2,
+                        b.sise_issue_stock_normal, b.toja_discision, b.toja_prop_price, b.toja_eps, b.toja_per, b.toja_comp,
+                        b.srim_revenue_rate, b.srim_jibea, b.srim_roa, b.srim_roe,
+                        substr(b.srim_value,1,instr(b.srim_value,'.',1,1)-1) as srim_value,
+                        b.srim_issue_stock,
+                        b.srim_prop_price, b.srim_10_price, b.srim_20_price
+                 from   hdbown.prediction_pn a,
+                        hdbown.prediction_detail_ko b
+                 where  1=1
+                   and  a.code_ = b.code_
+                   and  replace(a.date_, '-') = b.date_
+                    <if test="KEY != null and KEY != ''">
+                        and a.key_ = #{KEY}
+                    </if>
+             ) where rownum = 1
+    </select>
+
+</mapper>
