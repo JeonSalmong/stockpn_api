@@ -40,7 +40,7 @@
         from (
                  select  a.date_
                       , a.code_         as code
-                      , substr(a.name_,1,1) || lpad('*',length(a.name_)-2,'*') || substr(a.name_, length(a.name_), 1) AS name,
+                      , substr(a.name_,1,1) || lpad('*',length(a.name_)-2,'*') || substr(a.name_, length(a.name_), 1) AS name
                       , max(a.pn)       as pn
                       , max(a.ratio_)   as ratio
                       , count(*)        as cnt
