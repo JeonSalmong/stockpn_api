@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/detail_kor.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ajax-cross-origin.min.js"></script>
+    <script>
+
+        function Request(){
+            var requestParam ="";
+            this.getParameter = function(param){
+            var url = unescape(location.href); //현재 주소를 decoding
+            var paramArr = (url.substring(url.indexOf("?")+1,url.length)).split("&"); //파라미터만 자르고, 다시 &그분자를 잘라서 배열에 넣는다.
+
+                for(var i = 0 ; i < paramArr.length ; i++){
+                    var temp = paramArr[i].split("="); //파라미터 변수명을 담음
+                    if(temp[0].toUpperCase() == param.toUpperCase()){
+                        requestParam = paramArr[i].split("=")[1]; // 변수명과 일치할 경우 데이터 삽입
+                        break;
+                    }
+                }
+                return requestParam;
+            };
+        }
+
+        var request = new Request();
+
+        var st_key = request.getParameter("st_key");
+
+        function bodyOnload() {
+            $('#loading').show();
+            getData();
+        };
+
+        var headline;
+
+        function getData() {
+
+            URL = "http://146.56.147.121:8080/stockpn?pn=DEUS&key="+st_key;
+            // URL = "http://localhost:8080/stockpn?pn=DEUS&key="+st_key;
+
+            $.ajax({
+                type:"GET",
+                dataType: "json",
+                url: URL,
+                async: true,
+                cache: false,
+                success: function(data) {
+                    var data_cnt = 0;
+                    for (key in data) {
+                        console.log(data[key].length);
+                        data_cnt = data[key].length
+                    }
+
+                    if (data_cnt > 0) {
+                        jsonData = data[key];
+
+                        headline = jsonData[0].headline;
+                        document.getElementById("headline").innerText = headline;
+
+
+                        $('#loading').hide()
+                        $('#content_container').show()
+                        $('.ad-banner').show()
+                    } else {
+                        $('#loading').hide()
+                        $('#err_msg').show()
+                    }
+                    $('#button').show()
+                }
+            });
+        };
+
+    </script>
+    <title>Document</title>
+</head>
+<body onload="bodyOnload()">
+    <div class="detail">
+        <div id="loading" class="animated bounce"></div>
+        <div id="err_msg"><h5 class="title1">re-try</h5></div>
+        <div id="content_container">
+            <table class="table" id="table2">
+                <thead>
+                    <th>Title</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="headline", data-label="Headline"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5 class="title1">We do not assume any responsibility for the results of investment activities conducted based on the contents of this document and cannot be used as evidence in legal disputes.</h5>
+        </div>
+    </div>
+    <br>
+    <button id="button" onclick="history.back()">확인</button>
+    <div class="ad-banner">
+        <ins class="kakao_ad_area" style="display:none;" 
+        data-ad-unit    = "DAN-1hv2rxegl9a28" 
+        data-ad-width   = "320" 
+        data-ad-height  = "100"></ins> 
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
+</body>
+</html>

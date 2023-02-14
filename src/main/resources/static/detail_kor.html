@@ -65,6 +65,7 @@
         var srim_prop_price;
         var srim_10_price;
         var srim_20_price;
+        var content;
 
         function getData() {
 
@@ -126,6 +127,9 @@
                         document.getElementById("toja_per").innerText = toja_per;
                         toja_comp = jsonData[0].tojaComp;
                         document.getElementById("toja_comp").innerText = toja_comp;
+
+                        content = jsonData[0].content;
+                        document.getElementById("content").innerText = content;
 
                         // srim_revenue_rate = jsonData[0].srimRevenueRate;
                         // document.getElementById("srim_revenue_rate").innerText = srim_revenue_rate;
@@ -229,6 +233,16 @@
                     </tr>
                 </tbody>
             </table>
+            <table class="table" id="table2">
+                <thead>
+                    <th>Title</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="content", data-label="기사 제목"></td>
+                    </tr>
+                </tbody>
+            </table>
 <!--            <h3 class="title">S-RIM (AI가 계산 해 본 수치)</h3>-->
 <!--            <table class="table" id="table1">-->
 <!--                <thead>-->
@@ -260,7 +274,7 @@
         </div>
     </div>
     <br>
-    <button id="button" onclick="location.href='index.html'">확인</button>
+    <button id="button" onclick="history.back()">확인</button>
     <div class="ad-banner">
         <ins class="kakao_ad_area" style="display:none;" 
         data-ad-unit    = "DAN-1hv2rxegl9a28" 

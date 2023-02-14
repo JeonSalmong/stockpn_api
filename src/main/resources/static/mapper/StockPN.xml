@@ -6,38 +6,64 @@
     <select id="getPos" parameterType="ParamMap" resultType="ParamMap">
         select *
         from (
-                select  a.date_,
-                        a.code_     as code,
-                        a.name_     as name,
-                        max(pn_)       pn,
-                        max(ratio_)    ratio,
-                        count(*)       cnt,
-                        max(a.key_) as keyCode
-                from    prediction_pn a
-                where   1 = 1
-                and     pn_ in ('P', 'C')
-                and     date_ = to_char(sysdate, 'YYYY-MM-DD')
-                group by a.date_, code_, name_
-                order by date_ desc, ratio desc
+                 select  a.date_
+                      , a.code_         as code
+                      , a.name_         as name
+                      , max(a.pn)       as pn
+                      , max(a.ratio_)   as ratio
+                      , count(*)        as cnt
+                      , max(a.key_)     as keyCode
+                 from    (
+                             select
+                                 key_, date_, code_, name_, ratio_,
+                                 case   when GPT_PN_ is not null then
+                                            case when GPT_PN_ = 'P' then 'P'
+                                                 when GPT_PN_ = 'N' then 'N'
+                                                 else '' end
+                                        else
+                                            case when pn_ = 'P' then 'P'
+                                                 when pn_ = 'N' then 'N'
+                                                 else '' end
+                                     end as   pn
+                             from    hdbown.prediction_pn
+                         ) a
+                 where   1 = 1
+                   and     a.pn = 'P'
+                   and     a.date_ = to_char(sysdate, 'YYYY-MM-DD')
+                 group by a.date_, a.code_, a.name_
+                 order by a.date_ desc, ratio desc
         ) where rownum <![CDATA[ < ]]>= 10
     </select>
 
     <select id="getNeg" parameterType="ParamMap" resultType="ParamMap">
         select *
         from (
-                 select  a.date_,
-                         a.code_     as code,
-                         substr(name_,1,1) || lpad('*',length(name_)-2,'*') || substr(name_, length(name_), 1) AS name,
-                         max(pn_)       pn,
-                         max(ratio_)    ratio,
-                         count(*)       cnt,
-                         max(a.key_) as keyCode
-                 from    hdbown.prediction_pn a
+                 select  a.date_
+                      , a.code_         as code
+                      , substr(a.name_,1,1) || lpad('*',length(a.name_)-2,'*') || substr(a.name_, length(a.name_), 1) AS name,
+                      , max(a.pn)       as pn
+                      , max(a.ratio_)   as ratio
+                      , count(*)        as cnt
+                      , max(a.key_)     as keyCode
+                 from    (
+                             select
+                                 key_, date_, code_, name_, ratio_,
+                                 case   when GPT_PN_ is not null then
+                                            case when GPT_PN_ = 'P' then 'P'
+                                                 when GPT_PN_ = 'N' then 'N'
+                                                 else '' end
+                                        else
+                                            case when pn_ = 'P' then 'P'
+                                                 when pn_ = 'N' then 'N'
+                                                 else '' end
+                                     end as   pn
+                             from    hdbown.prediction_pn
+                         ) a
                  where   1 = 1
-                   and     pn_ = 'N'
-                   and     date_ = to_char(sysdate, 'YYYY-MM-DD')
-                 group by a.date_, code_, name_
-                 order by date_ desc, ratio desc
+                   and     a.pn = 'N'
+                   and     a.date_ = to_char(sysdate, 'YYYY-MM-DD')
+                 group by a.date_, a.code_, a.name_
+                 order by a.date_ desc, ratio desc
              ) where rownum <![CDATA[ < ]]>= 10
     </select>
 
@@ -45,7 +71,7 @@
         select *
         from (
             select
-                a.ticker as key_code
+                a.ticker as keyCode
                 , a.ticker as code
                 , a.company_name as name
                 , a.cl_pn as pn
@@ -84,7 +110,8 @@
                         b.srim_revenue_rate, b.srim_jibea, b.srim_roa, b.srim_roe,
                         substr(b.srim_value,1,instr(b.srim_value,'.',1,1)-1) as srim_value,
                         b.srim_issue_stock,
-                        b.srim_prop_price, b.srim_10_price, b.srim_20_price
+                        b.srim_prop_price, b.srim_10_price, b.srim_20_price,
+                        a.CONTENT_
                  from   hdbown.prediction_pn a,
                         hdbown.prediction_detail_ko b
                  where  1=1
@@ -94,6 +121,17 @@
                         and a.key_ = #{KEY}
                     </if>
              ) where rownum = 1
+    </select>
+
+    <select id="getDetail_us" parameterType="ParamMap" resultType="ParamMap">
+        select *
+        from (
+                 select  headline
+                 from    HDBOWN.prediction_pn_us
+                 where   1=1
+                   and   date_ = to_char(sysdate, 'YYYYMMDD')
+                   and   ticker = #{KEY}
+             )
     </select>
 
 </mapper>

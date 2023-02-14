@@ -16,4 +16,6 @@ public interface StockPNRepository {
     public List<Map<String, Object>> getUSA(Map<String, Object> params);
 
     public List<Map<String, Object>> getDetail(Map<String, Object> params);
+
+    public List<Map<String, Object>> getDetail_us(Map<String, Object> params);
 }

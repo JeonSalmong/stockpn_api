@@ -204,7 +204,7 @@
                             labelTitle = jsonData[i].name.substring(0, 8) + "(" + jsonData[i].code + ")"
                             barWidth = jsonData[i].ratio
                             cnt = jsonData[i].cnt
-                            st_key = jsonData[i].key_code
+                            st_key = jsonData[i].keycode
 
                             switch (i) {
                                 case 0:
@@ -234,8 +234,8 @@
                             }
 
                             $('#loading').hide()
-                            var label = "<div class='animal-label d-flex align-items-center'>" + labelTitle + "</div>"
-                            var bar = "<div class='bar-container position-relative container'><div class='" + tmp_className + "-box'></div><div class='d-flex justify-content-center align-items-center " + tmp_className + "-bar' style='width: " + barWidth + "%'><span class='d-block percent-text'>" + barWidth + "%("+cnt+")</span></div></div>"
+                            var label = "<div class='animal-label d-flex align-items-center'><a href='detail_us.html?st_key="+st_key+"'>" + labelTitle + "</a></div>"
+                            var bar = "<div class='bar-container position-relative container'><div class='" + tmp_className + "-box'></div><div onclick=\"location.href='detail_us.html?st_key="+st_key+"';\" class='d-flex justify-content-center align-items-center " + tmp_className + "-bar' style='width: " + barWidth + "%'><span class='d-block percent-text'>" + barWidth + "%("+cnt+")</span></div></div>"
                             labelContainer.childNodes[i].innerHTML = label + bar;
                             $('#blank').show();
                             $('#reload').show();

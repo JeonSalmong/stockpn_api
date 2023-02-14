@@ -39,6 +39,9 @@ public class StockPNController {
         } else if ("DEKO".equals(sClPn)) {
             params.put("KEY", sKey);
             resultList = service.getDetail(params);
+        } else if ("DEUS".equals(sClPn)) {
+            params.put("KEY", sKey);
+            resultList = service.getDetail_us(params);
         }
         else {
             resultList = null;
