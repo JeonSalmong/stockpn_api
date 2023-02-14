@@ -61,6 +61,7 @@
                          ) a
                  where   1 = 1
                    and     a.pn = 'N'
+                   and     not exists (select x.code_ from hdbown.prediction_pn x where x.date_ = a.date_ and x.code_ = a.code_ and x.GPT_PN_ = 'P')
                    and     a.date_ = to_char(sysdate, 'YYYY-MM-DD')
                  group by a.date_, a.code_, a.name_
                  order by a.date_ desc, ratio desc
