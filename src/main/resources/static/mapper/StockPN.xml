@@ -118,8 +118,8 @@
             *
         from (
                  select
-                        a.code_, a.name_, nvl(a.close_, 0) as close, nvl(a.diff_, 0) as diff, nvl(a.open_, 0) as open,
-                        nvl(a.high_, 0) as high, nvl(a.low_, 0) as low, nvl(a.volume_, 0) as volume,
+                        a.code_, a.name_, TO_CHAR(nvl(a.close_, 0), 'FM999,999,999,999') as close, TO_CHAR(nvl(a.diff_, 0), 'FM999,999,999,999') as diff, TO_CHAR(nvl(a.open_, 0) , 'FM999,999,999,999') as open,
+                        TO_CHAR(nvl(a.high_, 0), 'FM999,999,999,999') as high, TO_CHAR(nvl(a.low_, 0), 'FM999,999,999,999') as low, TO_CHAR(nvl(a.volume_, 0) , 'FM999,999,999,999')as volume,
                         b.ticker_desc1, b.ticker_desc2, b.sise_52_price, b.sise_revenue_rate, b.sise_siga_tot, b.sise_siga_tot2,
                         b.sise_issue_stock_normal, b.toja_discision, b.toja_prop_price, b.toja_eps, b.toja_per, b.toja_comp,
                         b.srim_revenue_rate, b.srim_jibea, b.srim_roa, b.srim_roe,
