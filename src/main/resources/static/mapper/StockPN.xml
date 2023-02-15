@@ -150,16 +150,34 @@
     </select>
 
     <select id="save" parameterType="ParamMap" resultType="ParamMap">
-        <if test="FEED == &quot;P&quot;">
-            update  hdbown.prediction_pn a
-            set     feed_p_ = (select nvl(max(feed_p_), 0) + 1 from hdbown.prediction_pn where key_ = #{KEY})
-            where   a.key_ = #{KEY}
-        </if>
-        <if test="FEED == &quot;N&quot;">
-            update  hdbown.prediction_pn a
-            set     feed_n_ = (select nvl(max(feed_n_), 0) + 1 from hdbown.prediction_pn where key_ = #{KEY})
-            where   a.key_ = #{KEY}
-        </if>
+        <choose>
+            <when test="CL != null and CL == &quot;US&quot;">
+                <if test="FEED == &quot;P&quot;">
+                    update  hdbown.prediction_pn_us a
+                    set     feed_p = (select nvl(max(feed_p), 0) + 1 from hdbown.prediction_pn_us where ticker = #{KEY})
+                    where   a.ticker = #{KEY}
+                </if>
+                <if test="FEED == &quot;N&quot;">
+                    update  hdbown.prediction_pn_us a
+                    set     feed_n = (select nvl(max(feed_n), 0) + 1 from hdbown.prediction_pn_us where ticker = #{KEY})
+                    where   a.ticker = #{KEY}
+                </if>
+            </when>
+            <otherwise>
+                <if test="FEED == &quot;P&quot;">
+                    update  hdbown.prediction_pn a
+                    set     feed_p_ = (select nvl(max(feed_p_), 0) + 1 from hdbown.prediction_pn where key_ = #{KEY})
+                    where   a.key_ = #{KEY}
+                </if>
+                <if test="FEED == &quot;N&quot;">
+                    update  hdbown.prediction_pn a
+                    set     feed_n_ = (select nvl(max(feed_n_), 0) + 1 from hdbown.prediction_pn where key_ = #{KEY})
+                    where   a.key_ = #{KEY}
+                </if>
+            </otherwise>
+        </choose>
+
+
     </select>
 
 </mapper>

@@ -23,6 +23,7 @@ public class StockPNController {
         String sClPn = request.getParameter("pn");
         String sKey = request.getParameter("key");
         String sFeed = request.getParameter("feed");
+        String sCl = request.getParameter("cl");
         Map<String, Object> params = new HashMap<>();
 
         List<Map<String, Object>> resultList = null;
@@ -46,6 +47,7 @@ public class StockPNController {
         } else if ("feed".equals(sClPn)) {
             params.put("KEY", sKey);
             params.put("FEED", sFeed);
+            params.put("CL", sCl);
             resultList = service.save(params);
         }
         else {
