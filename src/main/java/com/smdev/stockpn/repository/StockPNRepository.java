@@ -18,4 +18,6 @@ public interface StockPNRepository {
     public List<Map<String, Object>> getDetail(Map<String, Object> params);
 
     public List<Map<String, Object>> getDetail_us(Map<String, Object> params);
+
+    public List<Map<String, Object>> save(Map<String, Object> params);
 }

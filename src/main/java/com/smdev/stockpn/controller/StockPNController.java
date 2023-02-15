@@ -22,6 +22,7 @@ public class StockPNController {
     public ModelAndView stockpn(HttpServletRequest request) throws JsonProcessingException {
         String sClPn = request.getParameter("pn");
         String sKey = request.getParameter("key");
+        String sFeed = request.getParameter("feed");
         Map<String, Object> params = new HashMap<>();
 
         List<Map<String, Object>> resultList = null;
@@ -42,6 +43,10 @@ public class StockPNController {
         } else if ("DEUS".equals(sClPn)) {
             params.put("KEY", sKey);
             resultList = service.getDetail_us(params);
+        } else if ("feed".equals(sClPn)) {
+            params.put("KEY", sKey);
+            params.put("FEED", sFeed);
+            resultList = service.save(params);
         }
         else {
             resultList = null;

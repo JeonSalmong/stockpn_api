@@ -33,7 +33,7 @@
         function bodyOnload() {
             $('#loading').show();
             getData();
-        };
+        }
 
         let jsonData;
         var st_code;
@@ -67,10 +67,14 @@
         var srim_20_price;
         var content;
 
-        function getData() {
+        let URL = "http://146.56.147.121:8080/stockpn?pn=DEKO&key="+st_key;
+        let URL2 = "http://146.56.147.121:8080/stockpn?pn=feed&key="+st_key;
 
-            URL = "http://146.56.147.121:8080/stockpn?pn=DEKO&key="+st_key;
-            // URL = "http://localhost:8080/stockpn?pn=DEKO&key="+st_key;
+        // let URL = "http://localhost:8080/stockpn?pn=DEKO&key="+st_key;
+        // let URL2 = "http://localhost:8080/stockpn?pn=feed&key="+st_key;
+
+
+        function getData() {
 
             $.ajax({
                 type:"GET",
@@ -160,7 +164,22 @@
                     $('#button').show()
                 }
             });
-        };
+        }
+
+        function fn_save(flag) {
+            let setUrl = URL2 + "&feed=" + flag;
+
+            $.ajax({
+                type:"GET",
+                dataType: "json",
+                url: setUrl,
+                async: true,
+                cache: false,
+                success: function(data) {
+
+                }
+            });
+        }
 
     </script>
     <title>Document</title>
@@ -240,6 +259,10 @@
                 <tbody>
                     <tr>
                         <td id="content", data-label="기사 제목"></td>
+                        <td data-label="긍정인지 부정인지 알려주세요.">
+                            <img src="img/smiley-thin.png" height="25" width="25" style="margin-right:15px;" id="icon1" onclick="fn_save('P')">
+                            <img src="img/frown-thin.png" height="25" width="25" style="margin-right:10px;" id="icon2" onclick="fn_save('N')">
+                        </td>
                     </tr>
                 </tbody>
             </table>

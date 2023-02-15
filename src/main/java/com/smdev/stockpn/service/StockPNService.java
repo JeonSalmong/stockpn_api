@@ -41,4 +41,8 @@ public class StockPNService {
     public List<Map<String, Object>> getDetail_us(Map<String, Object> params) {
         return stockPNRepository.getDetail_us(params);
     }
+
+    public List<Map<String, Object>> save(Map<String, Object> params) {
+        return stockPNRepository.save(params);
+    }
 }
