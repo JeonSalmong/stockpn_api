@@ -215,7 +215,7 @@
 
                         for (let i = 0; i < maxPredictions; i++) {
 
-                            labelTitle = jsonData[i].name.substring(0, 5)
+                            labelTitle = jsonData[i].name.substring(0, 5) + "(" + jsonData[i].code + ")"
                             barWidth = jsonData[i].ratio
                             cnt = jsonData[i].cnt
                             st_key = jsonData[i].keycode
@@ -249,7 +249,7 @@
 
                             $('#loading').hide()
                             var label = "<div id='link_text' class='animal-label d-flex align-items-center'><a href='detail_kor.html?st_key="+st_key+"'>" + labelTitle + "</a></div>"
-                            var bar = "<div class='bar-container position-relative container'><div class='" + tmp_className + "-box'></div><div onclick=\"location.href='detail_kor.html?st_key="+st_key+"';\" class='d-flex justify-content-center align-items-center " + tmp_className + "-bar' style='width: " + barWidth + "%'><span class='d-block percent-text'>" + barWidth + "%("+cnt+")</span></div></div>"
+                            var bar = "<div class='bar-container position-relative container'><div class='" + tmp_className + "-box'></div><div onclick=\"location.href='detail_kor.html?st_key="+st_key+"';\" class='d-flex justify-content-center align-items-center " + tmp_className + "-bar' style='width: " + barWidth + "%'><span class='d-block percent-text'>" + barWidth + "%</span></div></div>"
                             labelContainer.childNodes[i].innerHTML = label + bar;
                             $('#blank').show();
                             $('#reload').show();
