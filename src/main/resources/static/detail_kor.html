@@ -181,6 +181,15 @@
             });
         }
 
+        function fn_onclick(){
+            let url = '';
+            if (ticker_desc1.indexOf('코스피') != -1)
+                url = 'https://www.google.com/finance/quote/'+ st_code +':KRX';
+            else
+                url = 'https://www.google.com/finance/quote/'+ st_code +':KOSDAQ';
+            window.location.href = url;
+        }
+
     </script>
     <title>Document</title>
 </head>
@@ -198,7 +207,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td id= "st_code", data-label="종목코드"></td>
+                        <td id= "st_code", data-label="종목코드(터치 해 보세요)" onclick="fn_onclick()"></td>
                         <td id= "st_name", data-label="종목명"></td>
                         <td id= "ticker_desc", data-label="분류"></td>
                     </tr>

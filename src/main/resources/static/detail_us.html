@@ -36,6 +36,8 @@
         }
 
         var headline;
+        var ticker;
+        var ticker_name;
 
         let URL = "http://146.56.147.121:8080/stockpn?pn=DEUS&key="+st_key;
         let URL2 = "http://146.56.147.121:8080/stockpn?pn=feed&key="+st_key;
@@ -63,6 +65,12 @@
 
                         headline = jsonData[0].headline;
                         document.getElementById("headline").innerText = headline;
+
+                        ticker = jsonData[0].ticker;
+                        document.getElementById("ticker").innerText = ticker;
+
+                        ticker_name = jsonData[0].name;
+                        document.getElementById("ticker_name").innerText = ticker_name;
 
 
                         $('#loading').hide()
@@ -92,6 +100,12 @@
             });
         }
 
+        function fn_onclick(){
+            let url = '';
+            url = 'https://finance.yahoo.com/quote/'+ ticker;
+            window.location.href = url;
+        }
+
     </script>
     <title>Document</title>
 </head>
@@ -100,21 +114,34 @@
         <div id="loading" class="animated bounce"></div>
         <div id="err_msg"><h5 class="title1">re-try</h5></div>
         <div id="content_container">
+            <h3 class="title">종목정보</h3>
+            <table class="table">
+                <thead>
+                <th>종목코드</th>
+                <th>종목명</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td id= "ticker", data-label="종목코드(터치 해 보세요)" onclick="fn_onclick()"></td>
+                    <td id= "ticker_name", data-label="종목명"></td>
+                </tr>
+                </tbody>
+            </table>
             <table class="table" id="table2">
                 <thead>
                     <th>Title</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td id="headline", data-label="Headline"></td>
-                        <td data-label="Please let me know if it is positive or negative.">
+                        <td id="headline", data-label="기사 제목"></td>
+                        <td data-label="긍정인지 부정인지 알려주세요.">
                             <img src="img/smiley-thin.png" height="25" width="25" style="margin-right:15px;" id="icon1" onclick="fn_save('P')">
                             <img src="img/frown-thin.png" height="25" width="25" style="margin-right:10px;" id="icon2" onclick="fn_save('N')">
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <h5 class="title1">We do not assume any responsibility for the results of investment activities conducted based on the contents of this document and cannot be used as evidence in legal disputes.</h5>
+            <h5 class="title1">본 자료의 내용에 의거하여 행해진 투자행위 결과에 대하여 어떠한 책임도 지지 않으며 법적 분쟁에서 증거로 사용 될 수 없습니다.</h5>
         </div>
     </div>
     <br>

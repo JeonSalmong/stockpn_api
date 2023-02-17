@@ -141,7 +141,7 @@
     <select id="getDetail_us" parameterType="ParamMap" resultType="ParamMap">
         select *
         from (
-                 select  headline
+                 select  headline, ticker, company_name as name
                  from    HDBOWN.prediction_pn_us
                  where   1=1
                    and   date_ = to_char(sysdate+9/24, 'YYYYMMDD')
