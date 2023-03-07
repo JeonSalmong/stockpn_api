@@ -48,11 +48,17 @@
         var ticker;
         var ticker_name;
 
-        let URL = "http://146.56.147.121:8080/stockpn?pn=DEUS&key="+st_key;
-        let URL2 = "http://146.56.147.121:8080/stockpn?pn=feed&key="+st_key;
+        let URL;
+        let URL2;
 
-        // let URL = "http://localhost:8080/stockpn?pn=DEUS&key="+st_key;
-        // let URL2 = "http://localhost:8080/stockpn?pn=feed&key="+st_key;
+        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+            URL = "http://localhost:8080/stockpn?pn=DEUS&key="+st_key;
+            URL2 = "http://localhost:8080/stockpn?pn=feed&key="+st_key;
+        } else {
+            URL = "http://146.56.147.121:8080/stockpn?pn=DEUS&key="+st_key;
+            URL2 = "http://146.56.147.121:8080/stockpn?pn=feed&key="+st_key;
+        }
+
 
         function getData() {
 

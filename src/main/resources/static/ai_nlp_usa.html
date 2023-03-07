@@ -133,11 +133,16 @@
         };
 
         let URL;
-        const urlPositive = "http://146.56.147.121:8080/stockpn?pn=UP";
-        const urlNegative = "http://146.56.147.121:8080/stockpn?pn=UN";
+        let urlPositive;
+        let urlNegative;
 
-        // const urlPositive = "http://localhost:8080/stockpn?pn=UP";
-        // const urlNegative = "http://localhost:8080/stockpn?pn=UN";
+        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+            urlPositive = "http://localhost:8080/stockpn?pn=UP";
+            urlNegative = "http://localhost:8080/stockpn?pn=UN";
+        } else {
+            urlPositive = "http://146.56.147.121:8080/stockpn?pn=UP";
+            urlNegative = "http://146.56.147.121:8080/stockpn?pn=UN";
+        }
 
         let labelContainer, maxPredictions;
         let jsonData;

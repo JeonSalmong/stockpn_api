@@ -126,7 +126,7 @@
                         substr(b.srim_value,1,instr(b.srim_value,'.',1,1)-1) as srim_value,
                         b.srim_issue_stock,
                         b.srim_prop_price, b.srim_10_price, b.srim_20_price,
-                        a.CONTENT_
+                        a.CONTENT_, nvl(a.report_, '-') as report_
                  from   hdbown.prediction_pn a,
                         hdbown.prediction_detail_ko b
                  where  1=1

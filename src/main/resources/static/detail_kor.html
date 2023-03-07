@@ -75,13 +75,17 @@
         var srim_10_price;
         var srim_20_price;
         var content;
+        var report;
+        let URL;
+        let URL2;
 
-        let URL = "http://146.56.147.121:8080/stockpn?pn=DEKO&key="+st_key;
-        let URL2 = "http://146.56.147.121:8080/stockpn?pn=feed&key="+st_key;
-
-        // let URL = "http://localhost:8080/stockpn?pn=DEKO&key="+st_key;
-        // let URL2 = "http://localhost:8080/stockpn?pn=feed&key="+st_key;
-
+        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+            URL = "http://localhost:8080/stockpn?pn=DEKO&key="+st_key;
+            URL2 = "http://localhost:8080/stockpn?pn=feed&key="+st_key;
+        } else {
+            URL = "http://146.56.147.121:8080/stockpn?pn=DEKO&key="+st_key;
+            URL2 = "http://146.56.147.121:8080/stockpn?pn=feed&key="+st_key;
+        }
 
         function getData() {
 
@@ -144,24 +148,27 @@
                         content = jsonData[0].content;
                         document.getElementById("content").innerText = content;
 
-                        // srim_revenue_rate = jsonData[0].srimRevenueRate;
-                        // document.getElementById("srim_revenue_rate").innerText = srim_revenue_rate;
-                        // srim_jibea = jsonData[0].srimJibea;
-                        // document.getElementById("srim_jibea").innerText = srim_jibea;
-                        // srim_roa = jsonData[0].srimRoa;
-                        // document.getElementById("srim_roa").innerText = srim_roa;
-                        // srim_roe = jsonData[0].srimRoe;
-                        // document.getElementById("srim_roe").innerText = srim_roe;
-                        // srim_value = jsonData[0].srimValue;
-                        // document.getElementById("srim_value").innerText = srim_value;
-                        // srim_issue_stock = jsonData[0].srimIssueStock;
-                        // document.getElementById("srim_issue_stock").innerText = srim_issue_stock;
-                        // srim_prop_price = jsonData[0].srimPropPrice;
-                        // document.getElementById("srim_prop_price").innerText = srim_prop_price;
-                        // srim_10_price = jsonData[0].srim10Price;
-                        // document.getElementById("srim_10_price").innerText = srim_10_price;
-                        // srim_20_price = jsonData[0].srim20Price;
-                        // document.getElementById("srim_20_price").innerText = srim_20_price;
+                        report = jsonData[0].report;
+                        document.getElementById("report").innerText = report;
+
+                        srim_revenue_rate = jsonData[0].srimRevenueRate;
+                        document.getElementById("srim_revenue_rate").innerText = srim_revenue_rate;
+                        srim_jibea = jsonData[0].srimJibea;
+                        document.getElementById("srim_jibea").innerText = srim_jibea;
+                        srim_roa = jsonData[0].srimRoa;
+                        document.getElementById("srim_roa").innerText = srim_roa;
+                        srim_roe = jsonData[0].srimRoe;
+                        document.getElementById("srim_roe").innerText = srim_roe;
+                        srim_value = jsonData[0].srimValue;
+                        document.getElementById("srim_value").innerText = srim_value;
+                        srim_issue_stock = jsonData[0].srimIssueStock;
+                        document.getElementById("srim_issue_stock").innerText = srim_issue_stock;
+                        srim_prop_price = jsonData[0].srimPropPrice;
+                        document.getElementById("srim_prop_price").innerText = srim_prop_price;
+                        srim_10_price = jsonData[0].srim10Price;
+                        document.getElementById("srim_10_price").innerText = srim_10_price;
+                        srim_20_price = jsonData[0].srim20Price;
+                        document.getElementById("srim_20_price").innerText = srim_20_price;
 
                         $('#loading').hide()
                         $('#content_container').show()
@@ -213,13 +220,29 @@
                     <th>종목코드</th>
                     <th>종목명</th>
                     <th>분류</th>
+                    <th>투자 Report(요약)</th>
                 </thead>
                 <tbody>
                     <tr>
                         <td id= "st_code", data-label="종목코드(터치 해 보세요)" onclick="fn_onclick()"></td>
                         <td id= "st_name", data-label="종목명"></td>
                         <td id= "ticker_desc", data-label="분류"></td>
+                        <td id= "report", data-label="투자 Report(요약)"></td>
                     </tr>
+                </tbody>
+            </table>
+            <table class="table" id="table2">
+                <thead>
+                <th>Title</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td id="content", data-label="기사 제목"></td>
+                    <td data-label="긍정인지 부정인지 알려주세요.">
+                        <img src="img/smiley-thin.png" height="25" width="25" style="margin-right:15px;" id="icon1" onclick="fn_save('P')">
+                        <img src="img/frown-thin.png" height="25" width="25" style="margin-right:10px;" id="icon2" onclick="fn_save('N')">
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <h3 class="title">시세현황</h3>
@@ -270,47 +293,33 @@
                     </tr>
                 </tbody>
             </table>
-            <table class="table" id="table2">
+            <h3 class="title">S-RIM (AI가 계산 해 본 수치)</h3>
+            <table class="table" id="table3">
                 <thead>
-                    <th>Title</th>
+                    <th>BBB-등급 5년 채권 수익율(%)</th>
+                    <th>지배주주 지분(억원)</th>
+                    <th>ROA</th>
+                    <th>ROE</th>
+                    <th>기업가치(원)</th>
+                    <th>발행주식수(보통주)</th>
+                    <th>적정가격(원)</th>
+                    <th>10% 이익 감소시(원)</th>
+                    <th>20% 이익 감소시(원)</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td id="content", data-label="기사 제목"></td>
-                        <td data-label="긍정인지 부정인지 알려주세요.">
-                            <img src="img/smiley-thin.png" height="25" width="25" style="margin-right:15px;" id="icon1" onclick="fn_save('P')">
-                            <img src="img/frown-thin.png" height="25" width="25" style="margin-right:10px;" id="icon2" onclick="fn_save('N')">
-                        </td>
+                        <td id="srim_revenue_rate", data-label="BBB-등급 5년 채권 수익율"></td>
+                        <td id="srim_jibea", data-label="지배주주 지분"></td>
+                        <td id="srim_roa", data-label="ROA"></td>
+                        <td id="srim_roe", data-label="ROE"></td>
+                        <td id="srim_value", data-label="기업가치"></td>
+                        <td id="srim_issue_stock", data-label="발행주식수(보통주)"></td>
+                        <td id="srim_prop_price", data-label="적정가격"></td>
+                        <td id="srim_10_price", data-label="10% 이익 감소시"></td>
+                        <td id="srim_20_price", data-label="20% 이익 감소시"></td>
                     </tr>
                 </tbody>
             </table>
-<!--            <h3 class="title">S-RIM (AI가 계산 해 본 수치)</h3>-->
-<!--            <table class="table" id="table1">-->
-<!--                <thead>-->
-<!--                    <th>BBB-등급 5년 채권 수익율</th>-->
-<!--                    <th>지배주주 지분</th>-->
-<!--                    <th>ROA</th>-->
-<!--                    <th>ROE</th>-->
-<!--                    <th>기업가치</th>-->
-<!--                    <th>발행주식수(보통주)</th>-->
-<!--                    <th>적정가격</th>-->
-<!--                    <th>10% 이익 감소시</th>-->
-<!--                    <th>20% 이익 감소시</th>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                    <tr>-->
-<!--                        <td id="srim_revenue_rate", data-label="BBB-등급 5년 채권 수익율"></td>-->
-<!--                        <td id="srim_jibea", data-label="지배주주 지분"></td>-->
-<!--                        <td id="srim_roa", data-label="ROA"></td>-->
-<!--                        <td id="srim_roe", data-label="ROE"></td>-->
-<!--                        <td id="srim_value", data-label="기업가치"></td>-->
-<!--                        <td id="srim_issue_stock", data-label="발행주식수(보통주)"></td>-->
-<!--                        <td id="srim_prop_price", data-label="적정가격"></td>-->
-<!--                        <td id="srim_10_price", data-label="10% 이익 감소시"></td>-->
-<!--                        <td id="srim_20_price", data-label="20% 이익 감소시"></td>-->
-<!--                    </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
             <h5 class="title1">본 자료의 내용에 의거하여 행해진 투자행위 결과에 대하여 어떠한 책임도 지지 않으며 법적 분쟁에서 증거로 사용 될 수 없습니다.</h5>
         </div>
     </div>
