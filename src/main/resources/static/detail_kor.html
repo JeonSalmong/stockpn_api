@@ -220,29 +220,38 @@
                     <th>종목코드</th>
                     <th>종목명</th>
                     <th>분류</th>
-                    <th>투자 Report(요약)</th>
                 </thead>
                 <tbody>
                     <tr>
                         <td id= "st_code", data-label="종목코드(터치 해 보세요)" onclick="fn_onclick()"></td>
                         <td id= "st_name", data-label="종목명"></td>
                         <td id= "ticker_desc", data-label="분류"></td>
-                        <td id= "report", data-label="투자 Report(chatGPT-요약)"></td>
                     </tr>
+                </tbody>
+            </table>
+            <table class="table_type1">
+                <tbody>
+                <tr>
+                    <td id= "report_title">투자 Report(chatGPT-요약)</td>
+                </tr>
+                <tr>
+                    <td id= "report"></td>
+                </tr>
                 </tbody>
             </table>
             <table class="table" id="table2">
                 <thead>
-                <th>Title</th>
+                    <th>기사 요약</th>
+                    <th>긍정인지 부정인지 알려주세요.</th>
                 </thead>
                 <tbody>
-                <tr>
-                    <td id="content", data-label="기사 제목"></td>
-                    <td data-label="긍정인지 부정인지 알려주세요.">
-                        <img src="img/smiley-thin.png" height="25" width="25" style="margin-right:15px;" id="icon1" onclick="fn_save('P')">
-                        <img src="img/frown-thin.png" height="25" width="25" style="margin-right:10px;" id="icon2" onclick="fn_save('N')">
-                    </td>
-                </tr>
+                    <tr>
+                        <td id="content", data-label="기사 요약"></td>
+                        <td data-label="긍정인지 부정인지 알려주세요.">
+                            <img src="img/smiley-thin.png" height="25" width="25" style="margin-right:15px;" id="icon1" onclick="fn_save('P')">
+                            <img src="img/frown-thin.png" height="25" width="25" style="margin-right:10px;" id="icon2" onclick="fn_save('N')">
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <h3 class="title">시세현황</h3>
