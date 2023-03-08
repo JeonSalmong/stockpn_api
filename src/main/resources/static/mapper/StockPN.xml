@@ -92,24 +92,25 @@
                 , a.cl_pn as pn
                 , a.ratio
                 , a.cnt
+                , a.time_
                 from
                 (
                 select
-                        ticker, date_, compound, company_name,
+                        ticker, date_, time_, compound, company_name,
                         round(abs(compound), 2) * 100 as ratio,
                         case when compound <![CDATA[ > ]]> 0 then 'P' when  compound <![CDATA[ < ]]> 0 then 'N' end cl_pn,
                         count(*) cnt
                 from    HDBOWN.prediction_pn_us
                 where   1=1
                 and     date_ = to_char(sysdate+9/24, 'YYYYMMDD')
-                group by ticker, date_, compound, company_name
+                group by ticker, date_, time_, compound, company_name
             ) a
             where 1=1
             and a.cl_pn is not null
             <if test="PN != null and PN != ''">
                 and a.cl_pn = #{PN}
             </if>
-            order by a.ratio desc
+            order by a.time_ desc, a.ratio desc
          ) where rownum <![CDATA[ < ]]>= 10
     </select>
 
