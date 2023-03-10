@@ -3,6 +3,8 @@ body {
   background-color: #ffffff;
   box-sizing: border-box;
   color: #35465d;
+    max-width: 600px; /* 예시 값 */
+    margin: 0 auto; /* 페이지 중앙 정렬 */
 }
 
 .navbar-light .navbar-brand {
@@ -37,14 +39,14 @@ body {
   color: #35465d;
 }
 
-@media screen and (max-width: 600px) {
-  html {
-    font-size: 10px;
-  }
-    .navbar-brand {
-        font-size: 2rem;
-    }
-}
+/*@media screen and (max-width: 600px) {*/
+/*  html {*/
+/*    font-size: 10px;*/
+/*  }*/
+/*    .navbar-brand {*/
+/*        font-size: 2rem;*/
+/*    }*/
+/*}*/
 
 /* gender */
 input#gender {

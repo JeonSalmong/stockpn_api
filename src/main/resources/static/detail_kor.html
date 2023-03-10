@@ -165,10 +165,10 @@
                         document.getElementById("srim_issue_stock").innerText = srim_issue_stock;
                         srim_prop_price = jsonData[0].srimPropPrice;
                         document.getElementById("srim_prop_price").innerText = srim_prop_price;
-                        srim_10_price = jsonData[0].srim10Price;
-                        document.getElementById("srim_10_price").innerText = srim_10_price;
-                        srim_20_price = jsonData[0].srim20Price;
-                        document.getElementById("srim_20_price").innerText = srim_20_price;
+                        // srim_10_price = jsonData[0].srim10Price;
+                        // document.getElementById("srim_10_price").innerText = srim_10_price;
+                        // srim_20_price = jsonData[0].srim20Price;
+                        // document.getElementById("srim_20_price").innerText = srim_20_price;
 
                         $('#loading').hide()
                         $('#content_container').show()
@@ -232,7 +232,7 @@
             <table class="table_type1">
                 <tbody>
                 <tr>
-                    <td id= "report_title">투자 Report(chatGPT-요약)</td>
+                    <td id= "report_title">기업Report(chatGPT-요약)</td>
                 </tr>
                 <tr>
                     <td id= "report"></td>
@@ -241,12 +241,12 @@
             </table>
             <table class="table" id="table2">
                 <thead>
-                    <th>기사 요약</th>
+                    <th>기사(chatGPT-요약)</th>
                     <th>긍정인지 부정인지 알려주세요.</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td id="content", data-label="기사 요약"></td>
+                        <td id="content", data-label="기사(chatGPT-요약)"></td>
                         <td data-label="긍정인지 부정인지 알려주세요.">
                             <img src="img/smiley-thin.png" height="25" width="25" style="margin-right:15px;" id="icon1" onclick="fn_save('P')">
                             <img src="img/frown-thin.png" height="25" width="25" style="margin-right:10px;" id="icon2" onclick="fn_save('N')">
@@ -312,8 +312,8 @@
                     <th>기업가치(원)</th>
                     <th>발행주식수(보통주)</th>
                     <th>적정가격(원)</th>
-                    <th>10% 이익 감소시(원)</th>
-                    <th>20% 이익 감소시(원)</th>
+<!--                    <th>10% 이익 감소시(원)</th>-->
+<!--                    <th>20% 이익 감소시(원)</th>-->
                 </thead>
                 <tbody>
                     <tr>
@@ -324,8 +324,8 @@
                         <td id="srim_value", data-label="기업가치(원)"></td>
                         <td id="srim_issue_stock", data-label="발행주식수(보통주)"></td>
                         <td id="srim_prop_price", data-label="적정가격(원)"></td>
-                        <td id="srim_10_price", data-label="10% 이익 감소시(원)"></td>
-                        <td id="srim_20_price", data-label="20% 이익 감소시(원)"></td>
+<!--                        <td id="srim_10_price", data-label="10% 이익 감소시(원)"></td>-->
+<!--                        <td id="srim_20_price", data-label="20% 이익 감소시(원)"></td>-->
                     </tr>
                 </tbody>
             </table>

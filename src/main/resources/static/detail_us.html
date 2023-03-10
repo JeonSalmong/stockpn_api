@@ -87,6 +87,9 @@
                         ticker_name = jsonData[0].name;
                         document.getElementById("ticker_name").innerText = ticker_name;
 
+                        report = jsonData[0].report;
+                        document.getElementById("report").innerText = report;
+
 
                         $('#loading').hide()
                         $('#content_container').show()
@@ -148,12 +151,22 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td id="headline", data-label="기사 제목"></td>
+                        <td id="headline", data-label="기사(chatGPT-요약)"></td>
                         <td data-label="긍정인지 부정인지 알려주세요.">
                             <img src="img/smiley-thin.png" height="25" width="25" style="margin-right:15px;" id="icon1" onclick="fn_save('P')">
                             <img src="img/frown-thin.png" height="25" width="25" style="margin-right:10px;" id="icon2" onclick="fn_save('N')">
                         </td>
                     </tr>
+                </tbody>
+            </table>
+            <table class="table_type1">
+                <tbody>
+                <tr>
+                    <td id= "report_title">기업Report(chatGPT-요약)</td>
+                </tr>
+                <tr>
+                    <td id= "report"></td>
+                </tr>
                 </tbody>
             </table>
             <h5 class="title1">본 자료의 내용에 의거하여 행해진 투자행위 결과에 대하여 어떠한 책임도 지지 않으며 법적 분쟁에서 증거로 사용 될 수 없습니다.</h5>
