@@ -7,6 +7,10 @@ body {
     margin: 0 auto; /* 페이지 중앙 정렬 */
 }
 
+html {
+    font-size: 10px;
+}
+
 .navbar-light .navbar-brand {
   line-height: 1.68;
   text-align: right;
