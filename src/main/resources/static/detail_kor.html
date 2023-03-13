@@ -149,6 +149,7 @@
                         document.getElementById("content").innerText = content;
 
                         report = jsonData[0].report;
+                        report = report.replace('<li>', '•');
                         document.getElementById("report").innerText = report;
 
                         srim_revenue_rate = jsonData[0].srimRevenueRate;
