@@ -144,11 +144,12 @@
     <select id="getDetail_us" parameterType="ParamMap" resultType="ParamMap">
         select *
         from (
-                 select  headline, ticker, company_name as name, nvl(report_, '-') as report
+                 select  headline, ticker, company_name as name, nvl(max(report_), '-') as report
                  from    HDBOWN.prediction_pn_us
                  where   1=1
                    and   date_ = to_char(sysdate+9/24, 'YYYYMMDD')
                    and   ticker = #{KEY}
+                 group by ticker, company_name, headline
              )
     </select>
 
