@@ -3,13 +3,14 @@ body {
   background-color: #ffffff;
   box-sizing: border-box;
   color: #35465d;
+    font-size: 10px;
     max-width: 600px; /* 예시 값 */
     margin: 0 auto; /* 페이지 중앙 정렬 */
 }
 
-html {
-    font-size: 10px;
-}
+/*html {*/
+/*    font-size: 10px;*/
+/*}*/
 
 .navbar-light .navbar-brand {
   line-height: 1.68;
@@ -23,7 +24,7 @@ html {
 
 .navbar-nav{
   float: right;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .section {
@@ -116,7 +117,7 @@ input:checked + label > .knob > i:before {
 
 .upload-text {
     width: 58%;
-    font-size: 1.5rem;
+    /*font-size: 1.5rem;*/
     line-height: 1.53;
     text-align: center;
     color: #35465d;
@@ -222,7 +223,7 @@ input:checked + label > .knob > i:before {
 
 .try-again-text {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
   color: #ffffff;
   padding: 4px 15px;
@@ -363,26 +364,26 @@ input:checked + label > .knob > i:before {
   background-color: rgba(235, 166, 190, 1);
 }
 .percent-text {
-  font-size: 1.1rem;
+  font-size: 1.0rem;
   color: #ffffff;
 }
 .animal-label {
     width: 80%;
     text-align: left;
     height: 2rem;
-	font-size: 1.3rem;
+	font-size: 1.1rem;
 }
 #label-container {
     width: 80%;
     margin: 0 auto;
 }
 .result-message {
-    font-size: 2rem;
+    font-size: 1.2rem;
 }
 
 
 .animal-explain {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 .dinosaur-animal-title {
     color: #3ba363;
@@ -403,7 +404,7 @@ input:checked + label > .knob > i:before {
 }
 .cat-animal-celeb {
     color: #ff6c0a;
-    font-size: 1.2rem;
+    font-size:0.5rem;
 }
 .dog-animal-title {
     color: #548dd4;
