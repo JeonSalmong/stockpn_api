@@ -3,6 +3,8 @@ body {
   background-color: #ffffff;
   box-sizing: border-box;
   color: #35465d;
+    max-width: 600px; /* 예시 값 */
+    margin: 0 auto; /* 페이지 중앙 정렬 */
 }
 
 html {

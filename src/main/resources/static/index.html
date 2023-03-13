@@ -96,7 +96,7 @@
             <div id="blank">
                 <p>
                 </p>
-                <p> ※ 종목명(Tiker) 감성지수
+                <p> ※ 종목명 감성지수
                 </p>
             </div>
             <div id="reload" class="pt-3 image-title-wrap">
@@ -231,7 +231,8 @@
 
                         for (let i = 0; i < maxPredictions; i++) {
 
-                            labelTitle = jsonData[i].name.substring(0, 5) + "(" + jsonData[i].code + ")"
+                            // labelTitle = jsonData[i].name.substring(0, 5) + "(" + jsonData[i].code + ")"
+                            labelTitle = jsonData[i].name.substring(0, 8)
                             barWidth = jsonData[i].ratio
                             cnt = jsonData[i].cnt
                             st_key = jsonData[i].keycode
