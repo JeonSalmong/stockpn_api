@@ -8,9 +8,9 @@ body {
     margin: 0 auto; /* 페이지 중앙 정렬 */
 }
 
-/*html {*/
-/*    font-size: 10px;*/
-/*}*/
+html {
+    font-size: 10px;
+}
 
 .navbar-light .navbar-brand {
   line-height: 1.68;
@@ -371,7 +371,7 @@ input:checked + label > .knob > i:before {
     width: 80%;
     text-align: left;
     height: 2rem;
-	font-size: 1.1rem;
+	/*font-size: 1.1rem;*/
 }
 #label-container {
     width: 80%;
