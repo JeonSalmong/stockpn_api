@@ -129,12 +129,14 @@
                         substr(b.srim_value,1,instr(b.srim_value,'.',1,1)-1) as srim_value,
                         b.srim_issue_stock,
                         b.srim_prop_price, b.srim_10_price, b.srim_20_price,
-                        a.CONTENT_, nvl(a.report_, '-') as report_
+                        a.CONTENT_,
+                        nvl((select max(report_) from hdbown.prediction_pn where code_ = a.code_ group by code_), '-') as repoart_
                  from   hdbown.prediction_pn a,
                         hdbown.prediction_detail_ko b
                  where  1=1
                    and  a.code_ = b.code_
                    and  replace(a.date_, '-') = b.date_
+                   and  a.date_ = to_char(sysdate+9/24, 'YYYY-MM-DD')
                     <if test="KEY != null and KEY != ''">
                         and a.key_ = #{KEY}
                     </if>
@@ -144,12 +146,13 @@
     <select id="getDetail_us" parameterType="ParamMap" resultType="ParamMap">
         select *
         from (
-                 select  headline, ticker, company_name as name, nvl(max(report_), '-') as report
-                 from    HDBOWN.prediction_pn_us
+                 select  a.headline, a.ticker, a.company_name as name,
+                         nvl((select max(report_) from hdbown.prediction_pn_us where ticker = a.ticker group by ticker), '-') as repoart_
+                 from    HDBOWN.prediction_pn_us a
                  where   1=1
-                   and   date_ = to_char(sysdate+9/24, 'YYYYMMDD')
-                   and   ticker = #{KEY}
-                 group by ticker, company_name, headline
+                   and   a.date_ = to_char(sysdate+9/24, 'YYYYMMDD')
+                   and   a.ticker = #{KEY}
+                 group by a.ticker, a.company_name, a.headline
              )
     </select>
 
