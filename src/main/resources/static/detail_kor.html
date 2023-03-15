@@ -153,6 +153,9 @@
                             $("#table4").hide();
                         } else {
                             report = report.replace('<li>', '•');
+                            report = report.replace('</li>', '');
+                            report = report.replace('<ul>', '');
+                            report = report.replace('</ul>', '');
                             document.getElementById("report").innerText = report;
                         }
 
