@@ -88,7 +88,11 @@
                         document.getElementById("ticker_name").innerText = ticker_name;
 
                         report = jsonData[0].report;
-                        document.getElementById("report").innerText = report;
+                        if (report == '-' || report == 'ChatGPT 에러가 발생 했습니다' || report == 'unable to summarize the company report.') {
+                            $("#table4").hide();
+                        } else {
+                            document.getElementById("report").innerText = report;
+                        }
 
 
                         $('#loading').hide()
@@ -159,7 +163,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table class="table_type1">
+            <table class="table_type1" id="table4">
                 <tbody>
                 <tr>
                     <td id= "report_title">기업Report(chatGPT-요약)</td>

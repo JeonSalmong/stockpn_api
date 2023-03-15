@@ -130,7 +130,7 @@
                         b.srim_issue_stock,
                         b.srim_prop_price, b.srim_10_price, b.srim_20_price,
                         a.CONTENT_,
-                        nvl((select max(report_) from hdbown.prediction_pn where code_ = a.code_ group by code_), '-') as repoart_
+                        nvl((select max(report_) from hdbown.prediction_pn where code_ = a.code_ group by code_), '-') as report
                  from   hdbown.prediction_pn a,
                         hdbown.prediction_detail_ko b
                  where  1=1
@@ -147,7 +147,7 @@
         select *
         from (
                  select  a.headline, a.ticker, a.company_name as name,
-                         nvl((select max(report_) from hdbown.prediction_pn_us where ticker = a.ticker group by ticker), '-') as repoart_
+                         nvl((select max(report_) from hdbown.prediction_pn_us where ticker = a.ticker group by ticker), '-') as report
                  from    HDBOWN.prediction_pn_us a
                  where   1=1
                    and   a.date_ = to_char(sysdate+9/24, 'YYYYMMDD')

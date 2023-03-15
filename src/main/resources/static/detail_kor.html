@@ -149,8 +149,12 @@
                         document.getElementById("content").innerText = content;
 
                         report = jsonData[0].report;
-                        report = report.replace('<li>', '•');
-                        document.getElementById("report").innerText = report;
+                        if (report == '-' || report == 'ChatGPT 에러가 발생 했습니다') {
+                            $("#table4").hide();
+                        } else {
+                            report = report.replace('<li>', '•');
+                            document.getElementById("report").innerText = report;
+                        }
 
                         srim_revenue_rate = jsonData[0].srimRevenueRate;
                         document.getElementById("srim_revenue_rate").innerText = srim_revenue_rate;
@@ -230,7 +234,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table class="table_type1">
+            <table class="table_type1" id="table4">
                 <tbody>
                 <tr>
                     <td id= "report_title">기업Report(chatGPT-요약)</td>
