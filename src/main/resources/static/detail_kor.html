@@ -152,10 +152,10 @@
                         if (report == '-' || report == 'ChatGPT 에러가 발생 했습니다') {
                             $("#table4").hide();
                         } else {
-                            report = report.replace('<li>', '•');
-                            report = report.replace('</li>', '');
-                            report = report.replace('<ul>', '');
-                            report = report.replace('</ul>', '');
+                            report = report.replaceAll('<li>', '•');
+                            report = report.replaceAll('</li>', '');
+                            report = report.replaceAll('<ul>', '');
+                            report = report.replaceAll('</ul>', '');
                             document.getElementById("report").innerText = report;
                         }
 
